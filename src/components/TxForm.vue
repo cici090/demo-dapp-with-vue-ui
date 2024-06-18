@@ -1,0 +1,126 @@
+<script setup lang="ts">
+import {
+  SendTransactionRequest,
+  TonConnectUI,
+  useTonWallet,
+  useTonAddress,
+} from "@townsquarexyz/ui-vue";
+import { inject, onMounted, ref } from 'vue';
+import { JsonViewer } from "vue3-json-viewer";
+import "vue3-json-viewer/dist/index.css";
+
+const tx: SendTransactionRequest = {
+  validUntil: Math.floor(Date.now() / 1000) + 600,
+  messages: [
+    {
+      address:
+        "0:8a5a9c7b70d329be670de4e6cce652d464765114aa98038c66c3d8ceaf2d19b0",
+      amount: "5000000",
+      stateInit:
+        "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
+      payload: "te6ccsEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==",
+    },
+  ],
+};
+const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
+/**
+ * address 
+ */
+const userFriendlyAddress = useTonAddress();
+const rawAddress = useTonAddress(false);
+const wallet = useTonWallet();
+const test = ref<number | null>(10)
+
+onMounted(async () => {
+  console.log("TxForm" , wallet.value?.device);
+  console.log("TxForm" , tonConnectUI?.wallet);
+  // const wa = await tonConnectUI?.getWallets();
+  // console.log(wa);
+});
+
+
+const handleSendTransaction = () => {
+  if (tonConnectUI) {
+    tonConnectUI.sendTransaction(tx);
+  } else {
+    console.error("TonConnectUI instance is not available.");
+  }
+};
+const openWalletModal = () => {
+  if (tonConnectUI) {
+    tonConnectUI.openModal();
+  } else {
+    console.error("TonConnectUI instance is not available.");
+  }
+};
+</script>
+
+<template>
+  <div class="send-tx-form">
+    <div v-if="wallet">
+      <div>Connected Wallet: {{ wallet.name }}</div>
+      <div>Device: {{ wallet.device.appName }}</div>
+      <div>Device: {{ test. }}</div>
+      <div>User-friendly address: {{ userFriendlyAddress }}</div>
+      <div>Raw address: {{ rawAddress }}</div>
+    </div>
+
+    <h3>配置并发送交易</h3>
+
+    <JsonViewer :value="tx" :expand-depth="5" copyable boxed sort></JsonViewer>
+
+    <button v-if="wallet" @click="handleSendTransaction">
+      Send transaction
+    </button>
+    <button v-else @click="openWalletModal">连接钱包以发送交易</button>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.send-tx-form {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  //   gap: 20px;
+  //   padding: 20px;
+  align-items: center;
+  text-align: left;
+
+  h3 {
+    color: white;
+    opacity: 0.8;
+    font-size: 28px;
+  }
+
+  > div:nth-child(2) {
+    width: 100%;
+
+    span {
+      word-break: break-word;
+    }
+  }
+
+  > button {
+    border: none;
+    padding: 7px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+
+    background-color: rgba(102, 170, 238, 0.91);
+    color: white;
+    font-size: 16px;
+    line-height: 20px;
+
+    transition: transform 0.1s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+</style>
