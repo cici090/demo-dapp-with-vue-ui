@@ -4,8 +4,10 @@ import {
   TonConnectUI,
   useTonWallet,
   useTonAddress,
+  Wallet,
+WalletInfoWithOpenMethod,
 } from "@townsquarexyz/ui-vue";
-import { inject, onMounted, ref } from 'vue';
+import { inject, onMounted, Ref } from 'vue';
 import { JsonViewer } from "vue3-json-viewer";
 import "vue3-json-viewer/dist/index.css";
 
@@ -28,8 +30,7 @@ const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
  */
 const userFriendlyAddress = useTonAddress();
 const rawAddress = useTonAddress(false);
-const wallet = useTonWallet();
-const test = ref<number | null>(10)
+const wallet = useTonWallet() as unknown as Ref<Wallet | (Wallet & WalletInfoWithOpenMethod) | null>;
 
 onMounted(async () => {
   console.log("TxForm" , wallet.value?.device);
@@ -60,7 +61,6 @@ const openWalletModal = () => {
     <div v-if="wallet">
       <div>Connected Wallet: {{ wallet.name }}</div>
       <div>Device: {{ wallet.device.appName }}</div>
-      <div>Device: {{ test. }}</div>
       <div>User-friendly address: {{ userFriendlyAddress }}</div>
       <div>Raw address: {{ rawAddress }}</div>
     </div>

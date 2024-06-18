@@ -6,8 +6,10 @@
           the real button is down here
         </TonConnectButton>
       </div>
-      <TxForm></TxForm>
+      <!-- <TxForm></TxForm> -->
+      <tx-form></tx-form>
     </TonConnectUIProvider>
+    <!-- <HelloWorld></HelloWorld> -->
   </div>
 </template>
 
