@@ -8,7 +8,8 @@ import {
 WalletInfoWithOpenMethod,
 } from "@townsquarexyz/ui-vue";
 import { inject, onMounted, Ref } from 'vue';
-import { JsonViewer } from "vue3-json-viewer";
+import { Vue3JsonEditor } from "vue3-json-editor";
+
 import "vue3-json-viewer/dist/index.css";
 
 const tx: SendTransactionRequest = {
@@ -59,7 +60,7 @@ const openWalletModal = () => {
 <template>
   <div class="send-tx-form">
     <div v-if="wallet">
-      <div>Connected Wallet: {{ wallet.name }}</div>
+      <!-- <div>Connected Wallet: {{ wallet.name }}</div> -->
       <div>Device: {{ wallet.device.appName }}</div>
       <div>User-friendly address: {{ userFriendlyAddress }}</div>
       <div>Raw address: {{ rawAddress }}</div>
@@ -67,7 +68,11 @@ const openWalletModal = () => {
 
     <h3>配置并发送交易</h3>
 
-    <JsonViewer :value="tx" :expand-depth="5" copyable boxed sort></JsonViewer>
+    <Vue3JsonEditor
+      v-model="tx"
+      :show-btns="true"
+      :expandedOnStart="true"
+    />
 
     <button v-if="wallet" @click="handleSendTransaction">
       Send transaction
