@@ -10,8 +10,6 @@ WalletInfoWithOpenMethod,
 import { inject, onMounted, Ref } from 'vue';
 import { Vue3JsonEditor } from "vue3-json-editor";
 
-import "vue3-json-viewer/dist/index.css";
-
 const tx: SendTransactionRequest = {
   validUntil: Math.floor(Date.now() / 1000) + 600,
   messages: [
@@ -70,7 +68,6 @@ const openWalletModal = () => {
 
     <Vue3JsonEditor
       v-model="tx"
-      :show-btns="true"
       :expandedOnStart="true"
     />
 

@@ -1,14 +1,15 @@
 <template>
   <div class="create-jetton-demo">
     <h3>Create Jetton</h3>
-    <button @click="handleClick" v-if="wallet">Send create jetton</button>
+    <button class="send-create-jetton-btn" @click="handleClick" v-if="wallet">
+      Send create jetton
+    </button>
     <div class="ton-proof-demo__error" v-else>
       Connect wallet to send transaction
     </div>
     <pre>
     <Vue3JsonEditor
       v-model="data"
-      :show-btns="true"
       :expandedOnStart="true"
     />
     </pre>
@@ -16,11 +17,12 @@
 </template>
 
 <script lang="ts">
-import { ref, inject } from "vue";
-import { Vue3JsonEditor } from 'vue3-json-editor'
+import { ref, inject, Ref } from "vue";
+import { Vue3JsonEditor } from "vue3-json-editor";
 import { CreateJettonRequestDto } from "../server/dto/create-jetton-request-dto";
 import { TonProofDemoApi } from "../utils/TonProofDemoApi";
-import { TonConnectUI } from "@tonconnect/ui";
+import { TonConnectUI, Wallet, WalletInfoWithOpenMethod } from "@tonconnect/ui";
+import { useTonWallet } from "@townsquarexyz/ui-vue";
 
 const jetton: CreateJettonRequestDto = {
   name: "Joint Photographic Experts Group",
@@ -36,12 +38,15 @@ const jetton: CreateJettonRequestDto = {
 export default {
   name: "CreateJettonDemo",
   components: {
-    Vue3JsonEditor
+    Vue3JsonEditor,
   },
   setup() {
     const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
     const data = ref({});
-    const wallet = ref(null);
+    // const wallet = ref(null);
+    const wallet = useTonWallet() as unknown as Ref<
+      Wallet | (Wallet & WalletInfoWithOpenMethod) | null
+    >;
 
     const handleClick = async () => {
       const response = await TonProofDemoApi.createJetton(jetton);
@@ -91,7 +96,7 @@ export default {
     line-height: 20px;
   }
 
-  button {
+  .send-create-jetton-btn {
     border: none;
     padding: 7px 15px;
     border-radius: 15px;

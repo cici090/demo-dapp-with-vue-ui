@@ -64,6 +64,7 @@ onMounted(()=>{
 <style lang="scss">
 .page-app {
   text-align: center;
+  background-color: #333;
   .m-btn {
     margin: auto;
     float: right;

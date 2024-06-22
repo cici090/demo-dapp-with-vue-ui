@@ -1,18 +1,17 @@
 <template>
-  <div class="ton-proof-demo" v-if="authorized">
+  <div class="ton-proof-demo">
     <h3>Demo backend API with ton_proof verification</h3>
     <button @click="handleClick" v-if="authorized">
       Call backend getAccountInfo()
     </button>
     <div class="ton-proof-demo__error" v-else>Connect wallet to call API</div>
-    <Vue3JsonEditor v-model="data" :show-btns="true" :expandedOnStart="true" />
+    <Vue3JsonEditor v-model="data" :expandedOnStart="true" />
   </div>
 </template>
     
     <script  lang="ts">
-import { ref, onMounted, inject, computed } from "vue";
+import { ref, onMounted, inject, computed, watch } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
-import "vue3-json-viewer/dist/index.css";
 
 import { TonProofDemoApi } from "../utils/TonProofDemoApi";
 import { Account, TonConnectUI, useTonWallet } from "@townsquarexyz/ui-vue";
@@ -58,12 +57,14 @@ export default {
      * 点击当存在钱包的时候获取到AccountInfo
      */
     const handleClick = async () => {
-		if (!wallet) {
-			return;
-		}
-		const response = await TonProofDemoApi.getAccountInfo(wallet.value!.account);
-        data.value = response;
-	};
+      if (!wallet) {
+        return;
+      }
+      const response = await TonProofDemoApi.getAccountInfo(
+        wallet.value!.account
+      );
+      data.value = response;
+    };
 
     const checkProofAndAuthorize = async (w: {
       connectItems: {
@@ -128,6 +129,10 @@ export default {
         authorized.value = true;
       });
     };
+    watch(tonConnectUI!, (newValue, oldValue) => {
+      setAuthorized();
+      console.log(`Count changed from ${oldValue} to ${newValue}`);
+    });
 
     onMounted(() => {
       recreateProofPayload();

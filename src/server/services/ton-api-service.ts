@@ -5,6 +5,7 @@ import {Buffer} from "buffer";
 export class TonApiService {
 
   public static create(client: TonClient4 | CHAIN): TonApiService {
+    console.log("creating------");
     if (client === CHAIN.MAINNET) {
       client = new TonClient4({
         endpoint: 'https://mainnet-v4.tonhubapi.com'
