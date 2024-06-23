@@ -20,7 +20,7 @@
 import { ref, inject, Ref } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
 import { CreateJettonRequestDto } from "../server/dto/create-jetton-request-dto";
-import { TonProofDemoApi } from "../utils/TonProofDemoApi";
+import { TonProofDemoApi } from "../../TonProofDemoApi";
 import { TonConnectUI, Wallet, WalletInfoWithOpenMethod } from "@tonconnect/ui";
 import { useTonWallet } from "@townsquarexyz/ui-vue";
 

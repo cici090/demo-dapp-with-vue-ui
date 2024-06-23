@@ -1,4 +1,5 @@
-import {Address, TonClient4} from "@ton/ton";
+import {TonClient4} from "@ton/ton";
+import { Address} from '../../hooks/Address'
 import {CHAIN} from "@townsquarexyz/ui-vue";
 import {Buffer} from "buffer";
 

@@ -1,5 +1,6 @@
 import {sha256} from "@ton/crypto";
-import {Address, Cell, contractAddress, loadStateInit} from "@ton/ton";
+import { Cell, contractAddress, loadStateInit} from "@ton/ton";
+import { Address} from '../../hooks/Address'
 import {Buffer} from "buffer";
 import {randomBytes, sign} from "tweetnacl";
 import {CheckProofRequestDto} from "../dto/check-proof-request-dto";

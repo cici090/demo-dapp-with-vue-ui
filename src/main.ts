@@ -2,9 +2,12 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './router/index'
+
 import { runSingleInstance } from './utils/run-signle-instance';
 import { worker } from './server/worker';
-import { Buffer } from 'buffer';
+import '../polyfills';
+import '../buffer-polyfill.ts'
+
 
 async function enableMocking() {
     return new Promise(async (resolve) => {
@@ -30,7 +33,6 @@ async function enableMocking() {
         setInterval(verifyAndRestartWorker, 1_000);
     });
 }
-global.Buffer = global.Buffer || Buffer;
 const app = createApp(App);
 
 app.use(router)

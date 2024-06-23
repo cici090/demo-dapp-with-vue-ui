@@ -9,7 +9,7 @@ export default defineConfig({
   //   port: 28847,
   // },
   optimizeDeps: {
-    include: ['vue'],
+    include: ['vue','buffer'],
   },
   plugins: [
     vue()
