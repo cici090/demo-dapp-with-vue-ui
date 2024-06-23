@@ -5,7 +5,7 @@ import {
   TonProofItemReplySuccess
 } from "@townsquarexyz/ui-vue";
 import './patch-local-storage-for-github-pages';
-import {CreateJettonRequestDto} from "../server/dto/create-jetton-request-dto";
+import {CreateJettonRequestDto} from "./src/server/dto/create-jetton-request-dto";
 
 class TonProofDemoApiService {
   private localStorageKey = 'demo-api-access-token';

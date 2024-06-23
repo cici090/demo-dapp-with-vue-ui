@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","node_modules/@types"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","node_modules/@types", "TonProofDemoApi.ts", "patch-local-storage-for-github-pages.ts", "patch-local-storage-for-github-pages.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

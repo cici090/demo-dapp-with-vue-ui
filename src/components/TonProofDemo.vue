@@ -10,11 +10,11 @@
 </template>
     
     <script  lang="ts">
-import { ref, onMounted, inject, computed, watch } from "vue";
+import { ref, onMounted, inject, watch } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
 
 import { TonProofDemoApi } from "../utils/TonProofDemoApi";
-import { Account, TonConnectUI, useTonWallet } from "@townsquarexyz/ui-vue";
+import { TonConnectUI, useTonWallet } from "@townsquarexyz/ui-vue";
 import useInterval from "../hooks/useInterval";
 
 export default {
@@ -66,41 +66,6 @@ export default {
       data.value = response;
     };
 
-    const checkProofAndAuthorize = async (w: {
-      connectItems: {
-        tonProof: {
-          proof: {
-            timestamp: number;
-            domain: { lengthBytes: number; value: string };
-            payload: string;
-            signature: string;
-          };
-        };
-      };
-      account: Account;
-    }) => {
-      if (!w) {
-        TonProofDemoApi.reset();
-        authorized.value = false;
-        return;
-      }
-
-      if (w.connectItems?.tonProof && "proof" in w.connectItems.tonProof) {
-        await TonProofDemoApi.checkProof(
-          w.connectItems.tonProof.proof,
-          w.account
-        );
-      }
-
-      if (!TonProofDemoApi.accessToken) {
-        tonConnectUI!.disconnect();
-        authorized.value = false;
-        return;
-      }
-
-      authorized.value = true;
-    };
-
     /**
      * 当tonConnectUI内容发生改变的时
      * 从新请求tonProof内相应的状态
@@ -129,9 +94,10 @@ export default {
         authorized.value = true;
       });
     };
-    watch(tonConnectUI!, (newValue, oldValue) => {
+
+    watch(tonConnectUI!, () => {
       setAuthorized();
-      console.log(`Count changed from ${oldValue} to ${newValue}`);
+      recreateProofPayload();
     });
 
     onMounted(() => {
