@@ -1,7 +1,6 @@
 import {JettonMinter, storeJettonMintMessage} from "@ton-community/assets-sdk";
 import {internalOnchainContentToCell} from "@ton-community/assets-sdk/dist/utils";
-import {beginCell, storeStateInit, toNano} from "@ton/core";
-import { Address} from '../../hooks/Address'
+import {beginCell ,Address, storeStateInit, toNano} from "@ton/core";
 import {CHAIN} from "@tonconnect/sdk";
 import {HttpResponseResolver} from "msw";
 import {CreateJettonRequest} from "../dto/create-jetton-request-dto";

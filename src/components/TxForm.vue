@@ -5,9 +5,9 @@ import {
   useTonWallet,
   useTonAddress,
   Wallet,
-WalletInfoWithOpenMethod,
+  WalletInfoWithOpenMethod,
 } from "@townsquarexyz/ui-vue";
-import { inject, onMounted, Ref } from 'vue';
+import { inject, onMounted, Ref } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
 
 const tx: SendTransactionRequest = {
@@ -25,19 +25,20 @@ const tx: SendTransactionRequest = {
 };
 const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
 /**
- * address 
+ * address
  */
 const userFriendlyAddress = useTonAddress();
 const rawAddress = useTonAddress(false);
-const wallet = useTonWallet() as unknown as Ref<Wallet | (Wallet & WalletInfoWithOpenMethod) | null>;
+const wallet = useTonWallet() as unknown as Ref<
+  Wallet | (Wallet & WalletInfoWithOpenMethod) | null
+>;
 
 onMounted(async () => {
-  console.log("TxForm" , wallet.value?.device);
-  console.log("TxForm" , tonConnectUI?.wallet);
+  console.log("TxForm", wallet.value?.device);
+  console.log("TxForm", tonConnectUI?.wallet);
   // const wa = await tonConnectUI?.getWallets();
   // console.log(wa);
 });
-
 
 const handleSendTransaction = () => {
   if (tonConnectUI) {
@@ -66,10 +67,7 @@ const openWalletModal = () => {
 
     <h3>配置并发送交易</h3>
 
-    <Vue3JsonEditor
-      v-model="tx"
-      :expandedOnStart="true"
-    />
+    <Vue3JsonEditor v-model="tx" :expandedOnStart="true" class="json-view" />
 
     <button v-if="wallet" @click="handleSendTransaction">
       Send transaction
@@ -88,6 +86,9 @@ const openWalletModal = () => {
   //   padding: 20px;
   align-items: center;
   text-align: left;
+  .json-view {
+    color: #fff !important;
+  }
 
   h3 {
     color: white;

@@ -11,6 +11,7 @@
     <Vue3JsonEditor
       v-model="data"
       :expandedOnStart="true"
+      class="json-editor"
     />
     </pre>
   </div>
@@ -76,6 +77,9 @@ export default {
   align-items: center;
   margin-top: 60px;
   padding: 20px;
+  .json-editor {
+    width: 80%;
+  }
 
   h3 {
     color: white;

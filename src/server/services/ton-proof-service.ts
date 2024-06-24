@@ -1,10 +1,9 @@
-import {sha256} from "@ton/crypto";
-import { Cell, contractAddress, loadStateInit} from "@ton/ton";
-import { Address} from '../../hooks/Address'
-import {Buffer} from "buffer";
-import {randomBytes, sign} from "tweetnacl";
-import {CheckProofRequestDto} from "../dto/check-proof-request-dto";
-import {tryParsePublicKey} from "../wrappers/wallets-data";
+import { sha256 } from "@ton/crypto";
+import { Cell, Address, contractAddress, loadStateInit } from "@ton/ton";
+import { Buffer } from "buffer";
+import { randomBytes, sign } from "tweetnacl";
+import { CheckProofRequestDto } from "../dto/check-proof-request-dto";
+import { tryParsePublicKey } from "../wrappers/wallets-data";
 
 const tonProofPrefix = 'ton-proof-item-v2/';
 const tonConnectPrefix = 'ton-connect';

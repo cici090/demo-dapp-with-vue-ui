@@ -122,7 +122,7 @@ export default {
   gap: 20px;
   align-items: center;
   margin-top: 60px;
-  padding: 20px;
+  // padding: 20px;
 
   h3 {
     color: white;

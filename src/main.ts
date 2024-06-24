@@ -5,8 +5,6 @@ import router from './router/index'
 
 import { runSingleInstance } from './utils/run-signle-instance';
 import { worker } from './server/worker';
-import '../polyfills';
-import '../buffer-polyfill.ts'
 
 
 async function enableMocking() {
@@ -30,7 +28,7 @@ async function enableMocking() {
             }
         });
 
-        setInterval(verifyAndRestartWorker, 1_000);
+        setInterval(verifyAndRestartWorker, 1000);
     });
 }
 const app = createApp(App);
