@@ -117,11 +117,12 @@ export default {
     <style scoped lang="scss">
 .ton-proof-demo {
   display: flex;
-  width: 100%;
+  width: 98%;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  margin-top: 60px;
+  // margin-top: 60px;
+  margin: 60px auto;
   // padding: 20px;
 
   h3 {

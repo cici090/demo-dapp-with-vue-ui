@@ -105,7 +105,7 @@ export default {
   },
   setup(props) {
     const [_, setOptions] = useTonConnectUI();
-    c
+
     const colors = ref(defaultColors[props.theme]);
 
     const onChange = (value, property1, property2) => {

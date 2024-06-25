@@ -7,19 +7,19 @@
     <div class="ton-proof-demo__error" v-else>
       Connect wallet to send transaction
     </div>
-    <pre>
+
     <Vue3JsonEditor
       v-model="data"
       :expandedOnStart="true"
-      class="json-editor"
+      theme="my-json-theme"
     />
-    </pre>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, inject, Ref } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
+
 import { CreateJettonRequestDto } from "../server/dto/create-jetton-request-dto";
 import { TonProofDemoApi } from "../../TonProofDemoApi";
 import { TonConnectUI, Wallet, WalletInfoWithOpenMethod } from "@tonconnect/ui";
@@ -71,12 +71,13 @@ export default {
 <style scoped lang="scss">
 .create-jetton-demo {
   display: flex;
-  width: 100%;
+  width: 98%;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  margin-top: 60px;
-  padding: 20px;
+  // margin-top: 60px;
+  margin: 60px auto;
+  // padding: 20px;
   .json-editor {
     width: 80%;
   }
@@ -120,6 +121,21 @@ export default {
     &:active {
       transform: scale(0.97);
     }
+  }
+  .jv-container.jv-light {
+    background: transparent !important;
+  }
+  .jv-container.jv-light .jv-item.jv-object {
+    color: #cdf8ff !important;
+  }
+  .jv-container.jv-light .jv-key {
+    color: #cdf8ff !important;
+  }
+  .jv-container.jv-light {
+    color: #cdf8ff !important;
+  }
+  .jv-container.jv-light .jv-item.jv-array {
+    color: #cdf8ff !important;
   }
 }
 </style>

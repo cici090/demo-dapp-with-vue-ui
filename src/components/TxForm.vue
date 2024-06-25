@@ -65,7 +65,7 @@ const openWalletModal = () => {
       <div>Raw address: {{ rawAddress }}</div>
     </div>
 
-    <h3>配置并发送交易</h3>
+    <h3>Configure and send transaction</h3>
 
     <Vue3JsonEditor v-model="tx" :expandedOnStart="true" class="json-view" />
 
@@ -80,12 +80,13 @@ const openWalletModal = () => {
 .send-tx-form {
   flex: 1;
   display: flex;
-  width: 100%;
+  width: 98%;
   flex-direction: column;
   //   gap: 20px;
   //   padding: 20px;
   align-items: center;
   text-align: left;
+  margin: 0 auto;
   .json-view {
     color: #fff !important;
   }
@@ -105,6 +106,7 @@ const openWalletModal = () => {
   }
 
   > button {
+    margin-top: 30px;
     border: none;
     padding: 7px 15px;
     border-radius: 15px;
@@ -124,6 +126,9 @@ const openWalletModal = () => {
     &:active {
       transform: scale(0.97);
     }
+  }
+  div.jsoneditor-field{
+    color:#fff !important;
   }
 }
 </style>
