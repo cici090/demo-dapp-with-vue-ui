@@ -3,7 +3,7 @@
     <TonConnectUIProvider :options="options">
       <div class="m-btn">
         <TonConnectButton className="custom-class" :styles="{ color: 'red' }">
-          the real button is down here
+          <!-- the real button is down here -->
         </TonConnectButton>
       </div>
       <tx-form></tx-form>
@@ -64,7 +64,7 @@ onMounted(()=>{
 <style lang="scss">
 .page-app {
   text-align: center;
-  background-color: #333;
+  // background-color: #333;
   .m-btn {
     margin: auto;
     float: right;

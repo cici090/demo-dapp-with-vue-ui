@@ -72,7 +72,7 @@ const openWalletModal = () => {
     <button v-if="wallet" @click="handleSendTransaction">
       Send transaction
     </button>
-    <button v-else @click="openWalletModal">连接钱包以发送交易</button>
+    <button v-else @click="openWalletModal">Connect wallet to send the transaction</button>
   </div>
 </template>
 

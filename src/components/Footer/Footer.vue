@@ -104,22 +104,22 @@ import { THEME, TonConnectUI, useTonConnectUI } from "@townsquarexyz/ui-vue";
 import ColorsModal from "./ColorsModal.vue"
 
 const checkboxes = ref([true, false, false, true, true, true]);
-const returnStrategy = ref("back");
-const skipRedirect = ref("ios");
+const returnStrategy = ref<any>("back");
+const skipRedirect = ref<any>("ios");
 const enableAndroidBackHandler = ref(true);
 
-const [ setOptions ] = useTonConnectUI();
-const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
+const [tonConnectUI, setOptions] = useTonConnectUI();
 
-const onLangChange = (lang : string) => {
+
+const onLangChange = (lang : any) => {
     setOptions({ language: lang });
 };
 
-const onThemeChange = (theme : string ) => {
+const onThemeChange = (theme : any ) => {
   setOptions({ uiPreferences: { theme } });
 };
 
-const onBordersChange = (borders : string) => {
+const onBordersChange = (borders : any) => {
   setOptions({ uiPreferences: { borderRadius: borders } });
 };
 
