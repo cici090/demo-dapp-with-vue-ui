@@ -9,6 +9,7 @@
       <tx-form></tx-form>
       <create-jetton-demo></create-jetton-demo>
       <ton-proof-demo></ton-proof-demo>
+      <Footer></Footer>
     </TonConnectUIProvider>
     <!-- <HelloWorld></HelloWorld> -->
   </div>
@@ -20,6 +21,7 @@ import { TonConnectButton, TonConnectUIProvider ,THEME } from "@townsquarexyz/ui
 import TxForm from "../components/TxForm.vue";
 import CreateJettonDemo from "../components/CreateJettonDemo.vue";
 import TonProofDemo from "../components/TonProofDemo.vue";
+import Footer from "../components/Footer/Footer.vue";
 
 const options = {
   manifestUrl:

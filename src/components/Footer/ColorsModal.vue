@@ -25,7 +25,7 @@
   
   <script>
 import { THEME } from "@townsquarexyz/ui-vue";
-import ColorsSelect from "../ColorsSelect/ColorsSelect.vue"; // 假设 ColorsSelect 是一个 Vue 组件
+import ColorsSelect from "./ColorsSelect.vue";
 
 export default {
   name: "ColorsModal",

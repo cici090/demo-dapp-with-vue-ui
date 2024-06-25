@@ -2,7 +2,7 @@
   <footer class="footer">
     <div>
       <label>language</label>
-      <select @change="onLangChange($event.target.value)">
+      <select @change="onLangChange($event)">
         <option value="en">en</option>
         <option value="ru">ru</option>
       </select>
@@ -10,7 +10,7 @@
 
     <div>
       <label>theme</label>
-      <select @change.stop="onThemeChange($event?.target?.value)">
+      <select @change.stop="onThemeChange($event)">
         <option :value="THEME.DARK">dark</option>
         <option :value="THEME.LIGHT">light</option>
         <option value="SYSTEM">system</option>
@@ -19,7 +19,7 @@
 
     <div>
       <label>borders</label>
-      <select @change="onBordersChange($event.target.value)">
+      <select @change="onBordersChange($event)">
         <option value="m">m</option>
         <option value="s">s</option>
         <option value="none">none</option>
@@ -69,9 +69,9 @@
       </label>
     </div>
 
-    <div>
+    <!-- <div>
       <ColorsModal />
-    </div>
+    </div> -->
 
     <div>
       <label>
@@ -99,9 +99,9 @@
 </template>
   
   <script setup lang="ts">
-import { inject, ref, watch } from "vue";
-import { THEME, TonConnectUI, useTonConnectUI } from "@townsquarexyz/ui-vue";
-import ColorsModal from "./ColorsModal.vue"
+import { ref, watch } from "vue";
+import { THEME, useTonConnectUI } from "@townsquarexyz/ui-vue";
+// import ColorsModal from "./ColorsModal.vue";
 
 const checkboxes = ref([true, false, false, true, true, true]);
 const returnStrategy = ref<any>("back");
@@ -110,17 +110,19 @@ const enableAndroidBackHandler = ref(true);
 
 const [tonConnectUI, setOptions] = useTonConnectUI();
 
-
-const onLangChange = (lang : any) => {
-    setOptions({ language: lang });
+const onLangChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  setOptions({ language: target.value as any });
 };
 
-const onThemeChange = (theme : any ) => {
-  setOptions({ uiPreferences: { theme } });
+const onThemeChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  setOptions({ uiPreferences: { theme: target.value as any } });
 };
 
-const onBordersChange = (borders : any) => {
-  setOptions({ uiPreferences: { borderRadius: borders } });
+const onBordersChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  setOptions({ uiPreferences: { borderRadius: target.value as any } });
 };
 
 const onEnableAndroidBackHandlerChange = () => {
@@ -174,7 +176,8 @@ watch(enableAndroidBackHandler, () => {
   flex-wrap: wrap;
 
   > div > label {
-    color: white;
+    // color: white;
+    color: black;
     margin-right: 5px;
   }
 }
