@@ -1,6 +1,6 @@
 # Demo dapp with @ton/ui-vue
 
-Try it out https://ton-connect.github.io/demo-dapp-with-react-ui/
+Try it out https://townsquarexyz.github.io/demo-dapp-with-vue-ui/
 
 ## Learn more about Ton Connect
 - https://docs.ton.org/develop/dapps/ton-connect/
