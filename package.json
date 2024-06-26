@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host --force",
-    "build": "GH_PAGES=true VITE_GH_PAGES=true vite build",
+    "build": "GH_PAGES=true VITE_GH_PAGES=true & vite build",
     "preview": "vite preview",
     "postinstall": "node ./scripts/postinstall.mjs"
   },
