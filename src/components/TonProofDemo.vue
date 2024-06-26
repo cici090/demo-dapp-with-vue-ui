@@ -25,7 +25,7 @@ export default {
   setup() {
     const firstProofLoading = ref(true);
     const data = ref({});
-    const injected = ref(false);
+    // const injected = ref(false);
 
     const wallet = useTonWallet();
     const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
@@ -91,23 +91,24 @@ export default {
       });
     };
 
-    // watch(tonConnectUI!, () => {
-    //   setAuthorized();
-    //   recreateProofPayload();
-    // });
+    watch(tonConnectUI!, () => {
+      setAuthorized();
+      recreateProofPayload();
+    });
 
-    watch(
-      () => tonConnectUI,
-      () => {
-        if(injected.value) return;
-        if(tonConnectUI != null) {
-          injected.value = true;
-          tonConnectUI.onStatusChange(setAuthorized);
-          recreateProofPayload();
-        }
-      },
-      { deep: false, immediate: true }
-    );
+    // watch(
+    //   () => tonConnectUI,
+    //   () => {
+    //     console.log();
+    //     if(injected.value) return;
+    //     if(tonConnectUI != null) {
+    //       injected.value = true;
+    //       tonConnectUI.onStatusChange(setAuthorized);
+    //       recreateProofPayload();
+    //     }
+    //   },
+    //   { deep: false, immediate: true }
+    // );
 
     onMounted(() => {
       recreateProofPayload();
