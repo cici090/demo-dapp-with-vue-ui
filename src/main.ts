@@ -20,6 +20,7 @@ async function enableMocking() {
         resolve(serviceWorkerRegistration);
 
         const verifyAndRestartWorker = runSingleInstance(async () => {
+            console.log("verifyAndRestartWorker");
             const serviceWorkerRegistrations = await navigator.serviceWorker.getRegistrations();
 
             if (serviceWorkerRegistrations.length === 0) {
@@ -28,7 +29,7 @@ async function enableMocking() {
             }
         });
 
-        setInterval(verifyAndRestartWorker, 1000);
+        setInterval(verifyAndRestartWorker, 5000);
     });
 }
 const app = createApp(App);

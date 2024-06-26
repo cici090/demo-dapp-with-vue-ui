@@ -1,20 +1,25 @@
 <template>
   <div class="ton-proof-demo">
     <h3>Demo backend API with ton_proof verification</h3>
-    <button @click="handleClick" v-if="authorized">
+    <button @click="handleClick" v-if="wallet">
       Call backend getAccountInfo()
     </button>
     <div class="ton-proof-demo__error" v-else>Connect wallet to call API</div>
     <Vue3JsonEditor v-model="data" :expandedOnStart="true" />
   </div>
 </template>
-    
-    <script  lang="ts">
-import { ref, onMounted, inject, watch } from "vue";
+
+<script lang="ts">
+import { ref, onMounted, inject, watch, Ref } from "vue";
 import { Vue3JsonEditor } from "vue3-json-editor";
 
 import { TonProofDemoApi } from "../../TonProofDemoApi";
-import { TonConnectUI, useTonWallet } from "@townsquarexyz/ui-vue";
+import {
+  TonConnectUI,
+  useTonWallet,
+  Wallet,
+  WalletInfoWithOpenMethod,
+} from "@townsquarexyz/ui-vue";
 import useInterval from "../hooks/useInterval";
 
 export default {
@@ -25,12 +30,13 @@ export default {
   setup() {
     const firstProofLoading = ref(true);
     const data = ref({});
-    const injected = ref(false);
 
-    const wallet = useTonWallet();
     const tonConnectUI = inject<TonConnectUI | null>("tonConnectUI", null);
+    const wallet = useTonWallet() as unknown as Ref<Wallet | (Wallet & WalletInfoWithOpenMethod) | null
+    >;
 
     const authorized = ref(false);
+    const injected = ref(false);
 
     const recreateProofPayload = async () => {
       if (tonConnectUI) {
@@ -54,7 +60,9 @@ export default {
       }
     };
 
- 
+    /**
+     * 点击当存在钱包的时候获取到AccountInfo
+     */
     const handleClick = async () => {
       if (!wallet) {
         return;
@@ -65,7 +73,10 @@ export default {
       data.value = response;
     };
 
-
+    /**
+     * 当tonConnectUI内容发生改变的时
+     * 从新请求tonProof内相应的状态
+     */
     const setAuthorized = () => {
       tonConnectUI!.onStatusChange(async (w) => {
         if (!w) {
@@ -91,17 +102,11 @@ export default {
       });
     };
 
-    watch(tonConnectUI!, () => {
-      setAuthorized();
-      recreateProofPayload();
-    });
-
     watch(
       () => tonConnectUI,
       () => {
-        console.log();
-        if(injected.value) return;
-        if(tonConnectUI != null) {
+        if (injected.value) return;
+        if (tonConnectUI != null) {
           injected.value = true;
           tonConnectUI.onStatusChange(setAuthorized);
           recreateProofPayload();
@@ -110,21 +115,22 @@ export default {
       { deep: false, immediate: true }
     );
 
-    // onMounted(() => {
-    //   recreateProofPayload();
-    //   useInterval(recreateProofPayload, TonProofDemoApi.refreshIntervalMs);
-    // });
+    onMounted(() => {
+      recreateProofPayload();
+      useInterval(recreateProofPayload, TonProofDemoApi.refreshIntervalMs);
+    });
 
     return {
       data,
+      wallet,
       handleClick,
       authorized,
     };
   },
 };
 </script>
-    
-    <style scoped lang="scss">
+
+<style scoped lang="scss">
 .ton-proof-demo {
   display: flex;
   width: 98%;
@@ -177,4 +183,3 @@ export default {
   }
 }
 </style>
-    
