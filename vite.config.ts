@@ -18,8 +18,8 @@ export default defineConfig({
   plugins: [
     vue()
   ],
-  base: process.env.GH_PAGES ? '/demo-dapp-with-vue-ui/' : './',
-  // base: '/demo-dapp-with-vue-ui/',
+  // base: process.env.VITE_GH_PAGES ? '/demo-dapp-with-vue-ui/' : './',
+  base: '/demo-dapp-with-vue-ui/',
   build: {
     outDir: 'docs'
   },
