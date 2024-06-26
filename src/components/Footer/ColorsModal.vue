@@ -18,14 +18,14 @@
         >
       </div>
 
-      <ColorsSelect :theme="theme" />
+      <!-- <ColorsSelect :theme="theme" /> -->
     </div>
   </div>
 </template>
   
-  <script>
+  <script lang="ts">
 import { THEME } from "@townsquarexyz/ui-vue";
-import ColorsSelect from "./ColorsSelect.vue";
+// import ColorsSelect from "./ColorsSelect.vue";
 
 export default {
   name: "ColorsModal",
@@ -42,12 +42,9 @@ export default {
     closeModal() {
       this.opened = false;
     },
-    setTheme(newTheme) {
+    setTheme(newTheme : any) {
       this.theme = newTheme;
     },
-  },
-  components: {
-    ColorsSelect,
   },
 };
 </script>
