@@ -9,13 +9,21 @@ import { worker } from './server/worker';
 
 async function enableMocking() {
     return new Promise(async (resolve) => {
+        const isGitHubPages = import.meta.env.VITE_GH_PAGES === '1';
+
         const startMockWorker = () => worker.start({
             onUnhandledRequest: 'bypass',
             quiet: false,
             serviceWorker: {
-                url: `${import.meta.env.VITE_GH_PAGES ? '/demo-dapp-with-vue-ui' : ''}/mockServiceWorker.js`
+                url: `${isGitHubPages ? '/demo-dapp-with-vue-ui' : ''}/mockServiceWorker.js`
             }
         });
+
+        if (isGitHubPages) {
+            console.log('Deployed to GitHub Pages');
+        } else {
+            console.log('Deployed to other environment');
+        }
         let serviceWorkerRegistration = await startMockWorker();
         resolve(serviceWorkerRegistration);
 

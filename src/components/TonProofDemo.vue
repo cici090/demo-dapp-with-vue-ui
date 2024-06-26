@@ -102,18 +102,23 @@ export default {
       });
     };
 
-    watch(
-      () => tonConnectUI,
-      () => {
-        if (injected.value) return;
-        if (tonConnectUI != null) {
-          injected.value = true;
-          tonConnectUI.onStatusChange(setAuthorized);
-          recreateProofPayload();
-        }
-      },
-      { deep: false, immediate: true }
-    );
+    watch(tonConnectUI!, ()=>{
+      tonConnectUI!.onStatusChange(setAuthorized);
+      recreateProofPayload();
+    })
+
+    // watch(
+    //   () => tonConnectUI,
+    //   () => {
+    //     if (injected.value) return;
+    //     if (tonConnectUI != null) {
+    //       injected.value = true;
+    //       tonConnectUI.onStatusChange(setAuthorized);
+    //       recreateProofPayload();
+    //     }
+    //   },
+    //   { deep: false, immediate: true }
+    // );
 
     onMounted(() => {
       recreateProofPayload();
