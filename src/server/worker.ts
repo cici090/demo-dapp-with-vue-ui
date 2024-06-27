@@ -5,7 +5,8 @@ import {createJetton} from "./api/create-jetton";
 import {generatePayload} from "./api/generate-payload";
 import {getAccountInfo} from "./api/get-account-info";
 
-const baseUrl = document.baseURI.replace(/\/$/, '');
+const baseUrl = '';
+// const baseUrl = document.baseURI.replace(/\/$/, '');
 
 export const worker = setupWorker(
   http.post(`${baseUrl}/api/generate_payload`, generatePayload),

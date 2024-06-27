@@ -9,7 +9,9 @@ const tonProofPrefix = 'ton-proof-item-v2/';
 const tonConnectPrefix = 'ton-connect';
 const allowedDomains = [
   'ton-connect.github.io',
-  'localhost:5173'
+  'localhost:5173',
+  '127.0.0.1:8080',
+  'cici090.github.io'
 ];
 const validAuthTime = 15 * 60; // 15 minute
 

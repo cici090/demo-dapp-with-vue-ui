@@ -28,6 +28,7 @@ export const checkProof: HttpResponseResolver = async ({request}) => {
     }
 
     const token = await createAuthToken({address: body.address, network: body.network});
+    console.log('tonken----' , token);
 
     return ok({token: token});
   } catch (e) {
