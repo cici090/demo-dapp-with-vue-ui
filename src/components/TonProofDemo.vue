@@ -5,7 +5,7 @@
       Call backend getAccountInfo()
     </button>
     <div class="ton-proof-demo__error" v-else>Connect wallet to call API</div>
-    <Vue3JsonEditor v-model="data" :expandedOnStart="true" />
+    <Vue3JsonEditor v-model="data" :expandedOnStart="true" mode="view" />
   </div>
 </template>
     
